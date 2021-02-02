@@ -1,0 +1,17 @@
+{% extends 'template.twig' %}
+{% block form %}
+    <div class="form-group">
+        <label for="ripemd160">Votre texte en clair</label>
+        {% if plain is defined %}
+            <input type="text" class="form-control" id="ripemd160" name="ripemd160" value="{{ plain }}">
+        {% else %}
+            <input type="text" class="form-control" id="ripemd160" name="ripemd160">
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {% if hash is defined %}
+            Résultat du hash : {{ hash }}
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Hasher en RipeMD160</button>
+{% endblock %}

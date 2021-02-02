@@ -1,0 +1,36 @@
+{% extends 'template.twig' %}
+{% block form %}
+    <div class="form-group">
+        <label for="aes">Votre texte</label>
+        {% if plain is defined %}
+            <input type="text" class="form-control" id="aes" name="aes" value="{{ plain }}">
+        {% else %}
+            <input type="text" class="form-control" id="aes" name="aes">
+        {% endif %}
+    </div>
+    <div class="form-group">
+        <label for="key">Votre clé</label>
+        {% if key is defined %}
+            <input type="text" class="form-control" id="key" name="key" value="{{ key }}">
+        {% else %}
+            <input type="text" class="form-control" id="key" name="key">
+        {% endif %}
+
+        
+    </div>
+    <div class="form-group">
+        {% if res is defined %}
+            Résultat : {{ res }}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="type">Type</label>
+        <select class="form-control" name="type" id="type">
+            <option value="1">Encrypter</option>
+            <option value="2">Décrypter</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+{% endblock %}
