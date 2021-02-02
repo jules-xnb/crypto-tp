@@ -10,6 +10,8 @@ keccak512 = require('js-sha3').keccak512;
 const RIPEMD160 = require('ripemd160');
 const Blowfish = require('egoroof-blowfish');
 const NodeRSA = require('node-rsa');
+const cryptico = require('cryptico')
+
 
 var fs = require('fs');
 
@@ -150,23 +152,19 @@ app.get('/RSA', function (req, res) {
 });
 
 app.post('/RSA', function (req, res) {
-    const key = new NodeRSA({b: 512});
-    var plain = req.body.res;
-    key = req.body.secret_key;
 
-    if (req.body.type == "1") {
-        var result = key.encrypt(JSON.stringify(plain), key).toString();
-    } else {
-        var result = CryptoJS.RSA.decrypt(plain, key);
-        result = JSON.parse(result.toString(CryptoJS.enc.Utf8));
+    if (req.body.passphrase != "") {
+        var passphrase = req.body.passphrase ; 
+        var bits = 1024 ; 
+        
     }
-    
+
+    var plain = req.body.rsa; 
+    var key = req.body.key;
+    const RSA = new NodeRSA()
+
     res.render(path.join(__dirname + '/templates/RSA.twig'), {
-        'plain': req.body.rsa,
-        'hash': key.encrypt(req.body.rsa, 'base64'),
-        'url': 'rsa',
-        'res': result,
-        'key': key
+        'url': 'rsa'
     });
 });
 

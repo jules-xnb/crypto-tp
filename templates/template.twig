@@ -13,7 +13,7 @@
        {% include 'navbar.twig' %} 
         <div class="container">
             <div class="jumbotron">
-                <form method="POST">
+                <form method="POST" id="form-crypto">
                     {% block form %}
                     {% endblock %}
                 </form>
@@ -21,12 +21,12 @@
         </div>
     </div>
     <script>
-        function download() {
+        function download(file_name) {
             var text = document.getElementById("my-textarea").value;
             text = text.replace(/\n/g, "\r\n"); // To retain the Line breaks.
             var blob = new Blob([text], {type: "text/plain"});
             var anchor = document.createElement("a");
-            anchor.download = "hash.txt";
+            anchor.download = file_name + ".txt";
             anchor.href = window.URL.createObjectURL(blob);
             anchor.target = "_blank";
             anchor.style.display = "none"; // just to be safe!
