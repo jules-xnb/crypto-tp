@@ -2,6 +2,11 @@
 {% block form %}
     <div class="form-group">
         <label for="rsa">Votre texte</label>
+
+
+    </div>
+    <div class="form-group">
+        <label for="rsa">Votre texte</label>
         {% if plain is defined %}
             <input type="text" class="form-control" id="rsa" name="rsa" value="{{ plain }}">
         {% else %}

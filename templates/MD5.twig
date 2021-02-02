@@ -8,10 +8,17 @@
             <input type="text" class="form-control" id="md5" name="md5">
         {% endif %}
     </div>
-    <div class="form-group">
+    <button type="submit" class="btn btn-primary">Hasher en md5</button>
+    <div class="form-group" style="margin-top: 20px;">
         {% if hash is defined %}
-            Résultat du hash : {{ hash }}
+            <label for="textval">Résultat du hash :</label>
+            <textarea class="form-control" id="my-textarea">{{ hash }}</textarea>
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="download()" class="btn btn-primary">Sauvegarder</button>
         {% endif %}
     </div>
-    <button type="submit" class="btn btn-primary">Hasher en md5</button>
-{% endblock %}
+{% endblock %} 
+
+
+

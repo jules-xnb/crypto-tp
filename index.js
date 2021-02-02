@@ -8,8 +8,10 @@ const CryptoJS = require("crypto-js");
 sha3_512 = require('js-sha3').sha3_512;
 keccak512 = require('js-sha3').keccak512;
 const RIPEMD160 = require('ripemd160');
-const Blowfish = require('javascript-blowfish');
+const Blowfish = require('egoroof-blowfish');
 const NodeRSA = require('node-rsa');
+
+var fs = require('fs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', 'templates');
@@ -172,20 +174,20 @@ app.post('/RSA', function (req, res) {
  * Routes pour le Blowfish
  */
 app.get('/BlowFish', function (req, res) {
-   res.render(path.join(__dirname + '/templates/BlowFish.twig'),{
+   res.render(path.join(__dirname + '/templates/BlowFish.twig'),{  
        'url' : 'blowfish'
    });
 });
  
 app.post('/BlowFish', function (req, res) {
-    const bf = new Blowfish(req.body.secret_key);
+    const bf = new Blowfish(req.body.secret_key, Blowfish.MODE.ECB, Blowfish.PADDING.NULL);
     
     // Si type = 1 on encrypte sinon on décrypte
     if(req.body.type == "1"){
-        var result = bf.encrypt(req.body.blowfish);
+        var result = bf.encode(req.body.blowfish, Blowfish.TYPE.STRING);
+        console.log(bf.decode(result,Blowfish.TYPE.STRING));
     }else{
-        var result = bf.decrypt(req.body.blowfish);
-        result = bf.trimZeroes(result); // for string/text information 
+        var result = bf.decode(req.body.blowfish, Blowfish.TYPE.STRING);
     }
 
     res.render(path.join(__dirname + '/templates/BlowFish.twig'),{

@@ -8,10 +8,12 @@
             <input type="text" class="form-control" id="sha2" name="sha2">
         {% endif %}
     </div>
-    <div class="form-group">
+    <button type="submit" class="btn btn-primary">Hasher en sha2-256</button>
+    <div class="form-group" style="margin-top: 20px;">
         {% if hash is defined %}
-            Résultat du hash : {{ hash }}
+            <label for="textval">Résultat du hash :</label>
+            <textarea class="form-control" id="my-textarea">{{ hash }}</textarea>
+            <button type="button" onclick="download()" class="btn btn-primary">Sauvegarder</button>
         {% endif %}
     </div>
-    <button type="submit" class="btn btn-primary">Hasher en sha2-256</button>
 {% endblock %}
